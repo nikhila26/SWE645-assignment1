@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Survey</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .required::after {
+            content: " *";
+            color: red;
+        }
+    </style>
 </head>
 <body class="w3-light-grey">
 
@@ -13,31 +19,34 @@
     </header>
 
     <div class="w3-container w3-white w3-margin w3-padding">
-        <form action="thankyou.html" method="GET">  <!-- Redirects to thankyou.html -->
+        <form id="surveyForm">
 
-            <label>First Name:</label>
+            <label class="required">First Name:</label>
             <input type="text" name="first_name" class="w3-input w3-border" required>
 
-            <label>Last Name:</label>
+            <label class="required">Last Name:</label>
             <input type="text" name="last_name" class="w3-input w3-border" required>
 
-            <label>Email:</label>
+            <label class="required">Email:</label>
             <input type="email" name="email" class="w3-input w3-border" required>
 
-            <label>Phone:</label>
+            <label class="required">Phone:</label>
             <input type="tel" name="phone" class="w3-input w3-border" required>
 
-            <label>Address:</label>
+            <label class="required">Street Address:</label>
             <input type="text" name="address" class="w3-input w3-border" required>
 
-            <label>City:</label>
+            <label class="required">City:</label>
             <input type="text" name="city" class="w3-input w3-border" required>
 
-            <label>State:</label>
+            <label class="required">State:</label>
             <input type="text" name="state" class="w3-input w3-border" required>
 
-            <label>ZIP Code:</label>
+            <label class="required">ZIP Code:</label>
             <input type="text" name="zip" class="w3-input w3-border" required>
+
+            <label class="required">Date of Survey:</label>
+            <input type="date" name="survey_date" class="w3-input w3-border" required>
 
             <br>
 
@@ -45,31 +54,32 @@
             <input type="checkbox" name="liked[]" value="Students"> Students <br>
             <input type="checkbox" name="liked[]" value="Location"> Location <br>
             <input type="checkbox" name="liked[]" value="Campus"> Campus <br>
+            <input type="checkbox" name="liked[]" value="Atmosphere"> Atmosphere <br>
+            <input type="checkbox" name="liked[]" value="Dorm Rooms"> Dorm Rooms <br>
             <input type="checkbox" name="liked[]" value="Sports"> Sports <br>
 
             <br>
 
             <label><strong>How did you hear about us?</strong></label><br>
             <input type="radio" name="source" value="Friends" required> Friends <br>
+            <input type="radio" name="source" value="Television" required> Television <br>
             <input type="radio" name="source" value="Internet" required> Internet <br>
-            <input type="radio" name="source" value="TV" required> TV <br>
             <input type="radio" name="source" value="Other" required> Other <br>
 
             <br>
 
-            <label><strong>How likely are you to recommend us to others?</strong></label>
+            <label class="required"><strong>How likely are you to recommend us to others?</strong></label>
             <select name="recommend" class="w3-select w3-border" required>
                 <option value="" disabled selected>-- Select an option --</option>
                 <option value="Very Likely">Very Likely</option>
                 <option value="Likely">Likely</option>
-                <option value="Neutral">Neutral</option>
                 <option value="Unlikely">Unlikely</option>
             </select>
 
             <br><br>
 
-            <label><strong>Enter 10 Raffle Numbers (comma-separated, 1-100):</strong></label>
-            <input type="text" name="raffle" class="w3-input w3-border" required>
+            <label class="required"><strong>Enter 10 Raffle Numbers (comma-separated, 1-100):</strong></label>
+            <input type="text" name="raffle" class="w3-input w3-border" required pattern="^(\d{1,2}|100)(,\s*(\d{1,2}|100)){9}$" title="Enter exactly 10 numbers between 1 and 100, separated by commas.">
 
             <label><strong>Additional Comments:</strong></label>
             <textarea name="comments" class="w3-input w3-border"></textarea>
@@ -81,6 +91,22 @@
 
         </form>
     </div>
+
+    <script>
+        document.getElementById("surveyForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            let raffleInput = document.querySelector('input[name="raffle"]').value;
+            let rafflePattern = /^(\d{1,2}|100)(,\s*(\d{1,2}|100)){9}$/;
+
+            if (!rafflePattern.test(raffleInput)) {
+                alert("Please enter exactly 10 valid numbers between 1 and 100, separated by commas.");
+                return;
+            }
+
+            alert("Form submitted successfully!");
+        });
+    </script>
 
 </body>
 </html>
