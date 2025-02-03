@@ -61,15 +61,15 @@
             <br>
 
             <label><strong>How did you hear about us?</strong></label><br>
-            <input type="radio" name="source" value="Friends" required> Friends <br>
-            <input type="radio" name="source" value="Television" required> Television <br>
-            <input type="radio" name="source" value="Internet" required> Internet <br>
-            <input type="radio" name="source" value="Other" required> Other <br>
+            <input type="radio" name="source" value="Friends"> Friends <br>
+            <input type="radio" name="source" value="Television"> Television <br>
+            <input type="radio" name="source" value="Internet"> Internet <br>
+            <input type="radio" name="source" value="Other"> Other <br>
 
             <br>
 
-            <label class="required"><strong>How likely are you to recommend us to others?</strong></label>
-            <select name="recommend" class="w3-select w3-border" required>
+            <label><strong>How likely are you to recommend us to others?</strong></label>
+            <select name="recommend" class="w3-select w3-border">
                 <option value="" disabled selected>-- Select an option --</option>
                 <option value="Very Likely">Very Likely</option>
                 <option value="Likely">Likely</option>
@@ -78,8 +78,8 @@
 
             <br><br>
 
-            <label class="required"><strong>Enter 10 Raffle Numbers (comma-separated, 1-100):</strong></label>
-            <input type="text" name="raffle" class="w3-input w3-border" required pattern="^(\d{1,2}|100)(,\s*(\d{1,2}|100)){9}$" title="Enter exactly 10 numbers between 1 and 100, separated by commas.">
+            <label><strong>Enter 10 Raffle Numbers (comma-separated, 1-100):</strong></label>
+            <input type="text" name="raffle" class="w3-input w3-border" pattern="^(\d{1,2}|100)(,\s*(\d{1,2}|100)){9}$" title="Enter exactly 10 numbers between 1 and 100, separated by commas.">
 
             <label><strong>Additional Comments:</strong></label>
             <textarea name="comments" class="w3-input w3-border"></textarea>
@@ -95,14 +95,6 @@
     <script>
         document.getElementById("surveyForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent default form submission
-            
-            let raffleInput = document.querySelector('input[name="raffle"]').value;
-            let rafflePattern = /^(\d{1,2}|100)(,\s*(\d{1,2}|100)){9}$/;
-
-            if (!rafflePattern.test(raffleInput)) {
-                alert("Please enter exactly 10 valid numbers between 1 and 100, separated by commas.");
-                return;
-            }
 
             alert("Form submitted successfully!");
         });
