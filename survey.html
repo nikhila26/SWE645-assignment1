@@ -20,7 +20,6 @@
 
     <div class="w3-container w3-white w3-margin w3-padding">
         <form id="surveyForm">
-
             <label class="required">First Name:</label>
             <input type="text" name="first_name" class="w3-input w3-border" required>
 
@@ -78,9 +77,9 @@
 
             <br><br>
 
-            <label><strong>Enter 10 Raffle Numbers (comma-separated, 1-100):</strong></label>
-            <input type="text" name="raffle" class="w3-input w3-border" pattern="^(\d{1,2}|100)(,\s*(\d{1,2}|100)){9}$" title="Enter exactly 10 numbers between 1 and 100, separated by commas.">
-
+            <label><strong>Enter at least 10 Raffle Numbers (comma-separated, 1-100) (Optional):</strong></label>
+            <input type="text" id="raffle" name="raffle" class="w3-input w3-border">
+            
             <label><strong>Additional Comments:</strong></label>
             <textarea name="comments" class="w3-input w3-border"></textarea>
 
@@ -95,6 +94,21 @@
     <script>
         document.getElementById("surveyForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent default form submission
+
+            const raffleInput = document.getElementById("raffle").value.trim();
+            if (raffleInput) {
+                const raffleNumbers = raffleInput.split(',').map(num => num.trim());
+                
+                if (raffleNumbers.length < 10) {
+                    alert("Please enter at least 10 raffle numbers.");
+                    return;
+                }
+                
+                if (!raffleNumbers.every(num => num.match(/^([1-9][0-9]?|100)$/))) {
+                    alert("Please enter valid numbers between 1 and 100.");
+                    return;
+                }
+            }
 
             alert("Form submitted successfully!");
         });
