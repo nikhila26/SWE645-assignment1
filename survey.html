@@ -21,16 +21,16 @@
     <div class="w3-container w3-white w3-margin w3-padding">
         <form id="surveyForm">
             <label class="required">First Name:</label>
-            <input type="text" name="first_name" class="w3-input w3-border" required>
+            <input type="text" name="first_name" class="w3-input w3-border" pattern="^[A-Za-z]+$" title="First name should only contain alphabets" required>
 
             <label class="required">Last Name:</label>
-            <input type="text" name="last_name" class="w3-input w3-border" required>
+            <input type="text" name="last_name" class="w3-input w3-border" pattern="^[A-Za-z]+$" title="Last name should only contain alphabets" required>
 
             <label class="required">Email:</label>
             <input type="email" name="email" class="w3-input w3-border" required>
 
             <label class="required">Phone:</label>
-            <input type="tel" name="phone" class="w3-input w3-border" required>
+            <input type="tel" name="phone" class="w3-input w3-border" pattern="^\d{10}$" title="Phone number must be exactly 10 digits" required>
 
             <label class="required">Street Address:</label>
             <input type="text" name="address" class="w3-input w3-border" required>
@@ -42,7 +42,7 @@
             <input type="text" name="state" class="w3-input w3-border" required>
 
             <label class="required">ZIP Code:</label>
-            <input type="text" name="zip" class="w3-input w3-border" required>
+            <input type="text" name="zip" class="w3-input w3-border" pattern="^\d+$" title="ZIP code must contain only digits" required>
 
             <label class="required">Date of Survey:</label>
             <input type="date" name="survey_date" class="w3-input w3-border" required>
@@ -94,6 +94,29 @@
     <script>
         document.getElementById("surveyForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent default form submission
+
+            const firstName = document.querySelector("input[name='first_name']");
+            const lastName = document.querySelector("input[name='last_name']");
+            if (!firstName.value.match(/^[A-Za-z]+$/)) {
+                alert("First name should only contain alphabets.");
+                return;
+            }
+            if (!lastName.value.match(/^[A-Za-z]+$/)) {
+                alert("Last name should only contain alphabets.");
+                return;
+            }
+
+            const phoneInput = document.querySelector("input[name='phone']");
+            if (!phoneInput.value.match(/^\d{10}$/)) {
+                alert("Phone number must be exactly 10 digits.");
+                return;
+            }
+
+            const zipInput = document.querySelector("input[name='zip']");
+            if (!zipInput.value.match(/^\d+$/)) {
+                alert("ZIP code must contain only digits.");
+                return;
+            }
 
             const raffleInput = document.getElementById("raffle").value.trim();
             if (raffleInput) {
